@@ -1,0 +1,136 @@
+---
+title: "Sovereign Default Risk and Tariffs"
+author: "Stephanie Houle"
+date: \today
+output: pdf_document
+abstract: "This paper examines the use import tariffs as an instrument to avoid a sovereign default. When a country is facing sovereign default risk, increasing tariff rates leads to a tradeoff between raising sufficient revenues to be able to borrow for the next period while trying to mitigate the cost on output resulting from taxing imports at a higher rate. This tradeoff is examined by using the model of sovereign default developped by @EG and adding an imported intermediate good to which a tariff can be applied. The result is that for countries who rely heavily on import tariffs, such as countries with weaker institutions, there is a cost to having tariffs bounded by trade agreements. This cost is estimated to be in the range of ."
+bibliography: ["bibEG.bib"]
+biblio-style: "apalike"
+link-citations: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Introduction
+Joining the World Trade Organization represents a milestone for many developping countries. This paper looks at the impact of having tariffs unilaterally tied down by such an tariff treaties in the context of a sovereign default episode. For countries with smaller institutions, one of the primary channels to raise revenues is through tariff rates. Countries with large informal sectors will find it easier to tax goods coming through the border than to collect income or consumtion tax from businesses. 
+
+
+In this framework, there is no retaliation by the country's trading partners from increasing tariffs, only the home firm faces a higher price of importing one of its inputs and hence, output in the home country is impacted. Then, the tradeoff exists between, the output cost of default for a country and the output loss from raising tariffs. 
+
+
+# Model
+The model is based after the @EG model with the addition of an final goods firm that pays a tariff $\tau$ to imports an intermediate input from abroad $f$. There are three agents, a benevolent government who maximizes the utility of home consumers, a firm and an international banker. 
+
+## Firm
+
+This final goods firm produces $y$ using inpts $h$, sourced domestically, and $f$, imported from abroad. The firm maximizes.
+
+\begin{equation}
+{\max}\hspace{2mm}\phi=y-(1+\tau)p_ff_h-p_hh_h
+\end{equation}
+
+Where $y=\left[\mu h_h^{\rho}+(1-\mu)f_h^{\rho}\right]^{1/\rho}$,
+
+The intermediate input $h_h$ is owned by domestic households which they sell to the final good firm at a price $p_h$, and the intermediate input $f_h$ is acquired from foreign households at price $p_f$ and tariff rate $\tau$. The relative importance of each input to creating the final good is given by $\mu$.
+
+
+## International Banker
+
+There is a continuum with measure one of identical risk-neutral international bankers who maximize their lifetime utility: \begin{equation}
+\max \Psi =\left(\frac{1-\delta}{1 + r*}\right) d-q(d')d'
+\end{equation}
+
+Where $\delta$ is the probability of default and $r*$ is the risk-free interest rate.
+
+The bankers first order condition is:
+
+\begin{equation}
+q(d')=\frac{1-\delta(d',h)}{1 + r*}
+\end{equation}
+
+Where $\delta$ is the probability the coutry will default.
+
+## Sovereign
+
+A benevolent government maximizes the households' lifetime utility $E\sum_{t=0}^{\infty}\beta^t u(c_t)$ according to the value function:
+\begin{equation}
+V(h,d)=\underset{c}{\max}\{u(c)+\beta E V(h',d')\}
+\end{equation}
+
+given the budget constraint:
+\begin{equation}
+c = y - d + qd' + \tau p_f f_h + p_hh
+\end{equation}
+The utility function follows the functional form:
+$$u(c) = \frac{c^{1-\sigma}-1}{1-\sigma}$$
+
+
+# Equilibrium
+The goods market clearing condition:
+
+ - $h = h_h + h_f$
+
+ - $f = f_h + f_f$
+ 
+ 
+The trade balance:
+
+ - $p_ff_h = p_hh_f$
+ 
+
+Endowment of $h$ faces an AR(1) process:
+
+$h_t=\alpha+\zeta h_{t-1} + \epsilon_t$
+
+# Recursive Equilibrium
+
+\textbf{Value of bad state:}
+$$V^b(h)=u(c^b)+\beta E[\theta V(0,h')+ (1-\theta) V(h')]$$
+$\theta$ is the probability of re-entry
+
+Cost of default as in @CE:
+
+\[
+h_b = h - \left\{ 
+\begin{array}{ll}
+    0, \text{ if } h\leq-\frac{a_o}{a_1}\\
+    a_oh + a_1h^2, \text{ if } h> -\frac{a_o}{a_1}\\
+    \end{array} \
+    \right.
+\]
+
+
+\textbf{Value of good state:}
+$$V^g(h,d)=\underset{c}{\max}\{u(c)+\beta EV^0(h',d')\}$$
+
+\textbf{Value of continuation:}
+$$V^0(h,d)=\max\{V^b(h),V^g(h,d')\}$$
+
+# Calibration
+
+|  Parameter | Value |
+|------------|-------|
+| $r$ - Risk free Interest Rate | $0.01$ |
+|$\beta$ - Discount Factor | $0.95$ |
+|$\mu$ - Prefrence for domestic versus foreign input| $0.4$ |
+|$\theta$ - Probability of re-entry| $0.0385$ |
+|$\rho$ - CES parameter| $0.5$ |
+|$a_o$ - Cost of default parameter ($a_oh + a_1h^2$) | $-0.18819$ |
+|$a_1$ - Cost of default parameter ($a_oh + a_1h^2$) | $0.24558$ |
+|$\alpha$ - Constant in h endowment AR(1) process| $0$ |
+|$\zeta$ - Coefficient on $h_{t-1}$  in h endowment AR(1) process |  $0.948503$ |
+|$\epsilon$ - Standard deviation in h endowment AR(1) process | $0.027092$ |
+
+
+# Results
+
+The geography of the border can also have impac this number, a country with a more poreous border will have a hard time enforcing an import tariff.
+
+# References
+
+\bibliographystyle{plainnat}
+\bibliography{bib}
